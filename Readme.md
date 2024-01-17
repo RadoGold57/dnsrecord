@@ -16,7 +16,7 @@ This script monitors changes to the DNS record of a specified domain and record 
 
 2. Navigate to the project directory:
 ````
-    cd dns-monitoring-script
+    cd dnsrecord
 ````
 
 3. Install dependencies:
@@ -26,7 +26,8 @@ This script monitors changes to the DNS record of a specified domain and record 
 4. Run the script:
 ````
     python dns_monitor.py
-    
+````
+````
     Follow the prompts to enter the domain, record type, and monitoring interval.
 ````
 ## Configuration
