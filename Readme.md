@@ -27,6 +27,7 @@ This script monitors changes to the DNS record of a specified domain and record 
 ````
     python dns_monitor.py -d example.com -r A -t 10
 ````
+![Screenshot from 2024-01-17 19-26-06](https://github.com/RadoGold57/dnsrecord/assets/64227801/76327b47-b1c5-4518-bdf1-6b5292642258)
 
 ## Configuration
 
