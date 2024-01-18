@@ -25,11 +25,9 @@ This script monitors changes to the DNS record of a specified domain and record 
 ````
 4. Run the script:
 ````
-    python dns_monitor.py
+    python dns_monitor.py -d example.com -r A -t 10
 ````
-````
-    Follow the prompts to enter the domain, record type, and monitoring interval.
-````
+
 ## Configuration
 
     Modify the requirements.txt file to adjust library versions if needed.
@@ -37,6 +35,7 @@ This script monitors changes to the DNS record of a specified domain and record 
 ## Contributing
 
 If you encounter issues or have suggestions, feel free to open an issue or create a pull request.
-License
+
+## License
 
 This script is licensed under the MIT License.

@@ -1,4 +1,6 @@
 import asyncio
+import argparse
+
 from rich.console import Console
 import dns.resolver
 
@@ -26,9 +28,12 @@ async def monitor_dns_changes_async(domain, record_type, interval):
         await asyncio.sleep(interval)
 
 if __name__ == '__main__':
-    domain = input("Enter the domain to monitor: ")
-    record_type = input("Enter the record type (e.g., A, MX): ")
-    interval = int(input("Enter the monitoring interval (in seconds): "))
+    parser = argparse.ArgumentParser(description='Monitor DNS changes for a specified domain and record type')
+    parser.add_argument("-d", "--domain", required=True, type=str, help='The domain to monitor')
+    parser.add_argument("-r", "--record-type", required=True, type=str, help='The record type to monitor')
+    parser.add_argument("-t", "--interval", required=False, type=int, default=10, help='The interval in seconds between DNS checks. Default is 10 seconds')
+
+    args = parser.parse_args()
 
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(monitor_dns_changes_async(domain, record_type, interval))
+    loop.run_until_complete(monitor_dns_changes_async(args.domain, args.record_type, args.interval))
