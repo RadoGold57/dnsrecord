@@ -1,8 +1,7 @@
 import asyncio
 import argparse
-
-from rich.console import Console
 import dns.resolver
+from rich.console import Console
 
 console = Console()
 
@@ -20,12 +19,15 @@ async def monitor_dns_changes_async(domain, record_type, interval):
     console.print(f"Initial DNS record: [bold blue]{initial_record}[/bold blue]")
 
     last_record = initial_record
-    while True:
-        current_record = await check_dns_record_with_resolver_async(domain, record_type)
-        if current_record != last_record:
-            console.print(f"[bold green]DNS record changed from[/bold green] {last_record} [bold green]to[/bold green] {current_record}")
-            last_record = current_record
-        await asyncio.sleep(interval)
+    try:
+        while True:
+            current_record = await check_dns_record_with_resolver_async(domain, record_type)
+            if current_record != last_record:
+                console.print(f"[bold green]DNS record changed from[/bold green] {last_record} [bold green]to[/bold green] {current_record}")
+                last_record = current_record
+            await asyncio.sleep(interval)
+    except KeyboardInterrupt:
+        console.print("Bye for now")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Monitor DNS changes for a specified domain and record type')
@@ -36,4 +38,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(monitor_dns_changes_async(args.domain, args.record_type, args.interval))
+    try:
+        loop.run_until_complete(monitor_dns_changes_async(args.domain, args.record_type, args.interval))
+    except KeyboardInterrupt:
+        console.print("Bye for now")
